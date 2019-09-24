@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DProgram", "3DProgram\3DProgram.vcxproj", "{66B9A1B0-9DAB-40B8-B78D-0A92D89955D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DProgram", "2DProgram\2DProgram.vcxproj", "{76D85013-0111-4C9E-A8A9-B0BB3A378EC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66B9A1B0-9DAB-40B8-B78D-0A92D89955D1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{66B9A1B0-9DAB-40B8-B78D-0A92D89955D1}.Debug|Win32.Build.0 = Debug|Win32
+		{66B9A1B0-9DAB-40B8-B78D-0A92D89955D1}.Release|Win32.ActiveCfg = Release|Win32
+		{66B9A1B0-9DAB-40B8-B78D-0A92D89955D1}.Release|Win32.Build.0 = Release|Win32
+		{76D85013-0111-4C9E-A8A9-B0BB3A378EC5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76D85013-0111-4C9E-A8A9-B0BB3A378EC5}.Debug|Win32.Build.0 = Debug|Win32
+		{76D85013-0111-4C9E-A8A9-B0BB3A378EC5}.Release|Win32.ActiveCfg = Release|Win32
+		{76D85013-0111-4C9E-A8A9-B0BB3A378EC5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
