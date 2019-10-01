@@ -73,7 +73,7 @@ void Transform(float i)
 	D3DXMATRIX matProj, matView;
 
 	//ビュー座標変換用の行列算出 start
-	D3DXVECTOR3 camera_pos(0.0f - i, 0.0f-i, -10.0f -i); // カメラ位置
+	D3DXVECTOR3 camera_pos(0.0f , 0.0f, -10.0f ); // カメラ位置
 	D3DXVECTOR3 eye_pos(0.0f, 0.0f, 0.0f);		// 注視点
 	D3DXVECTOR3 up_vector(0.0f, 1.0f, 0.0f);	// カメラの向き
 
@@ -120,9 +120,34 @@ void Draw()
 	v[0].color = D3DCOLOR_ARGB(255, 255, 255, 255);
 	v[1].color = D3DCOLOR_ARGB(255, 255, 255, 255);
 	v[2].color = D3DCOLOR_ARGB(255, 255, 255, 255);
+	v[3].color = D3DCOLOR_ARGB(255, 255, 255, 255);
+
 	v[0].pos.x = 0.0f; v[0].pos.y = 3.5f; v[0].pos.z = 0.0f;
-	v[1].pos.x = 6.0f; v[1].pos.y = -2.5f; v[1].pos.z = 0.0f;
-	v[2].pos.x = -6.0f; v[2].pos.y = -2.5f; v[2].pos.z = 0.0f;
+	v[1].pos.x = 6.0f; v[1].pos.y = 0.0f; v[1].pos.z = 0.0f;
+	v[2].pos.x = -6.0f; v[2].pos.y = 0.0f; v[2].pos.z = 0.0f;
+	v[3].pos.x = 0.0f; v[3].pos.y = -3.5f; v[3].pos.z = 0.0f;
+
+
+	IDirect3DVertexBuffer9 *pVB;
+	IDirect3DIndexBuffer9 *d3dib;
+	BYTE *bBuf;
+
+	g_pD3DDevice->BeginScene();
+
+	g_pD3DDevice->CreateVertexBuffer(
+		sizeof(VERTEX) * 4, 0, D3DFVF_XYZRHW, D3DPOOL_MANAGED, &pVB, NULL);
+	pVB->Lock(0, 0, (VOID**)bBuf, 0);
+	memcpy(pVB, v, sizeof(D3DFVF_XYZRHW) * 4);
+	pVB->Unlock();
+
+
+	WORD index[] = { 0 , 1 , 2 , 2 , 0 , 3 };
+	g_pD3DDevice->CreateIndexBuffer(sizeof(WORD) * 6, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_MANAGED, &d3dib, NULL);
+	d3dib->Lock(0, 0, (VOID**)bBuf, 0);
+	memcpy(bBuf, index, sizeof(WORD) * 6);
+	d3dib->Unlock();
+
+
 	// ポリゴンのローカル座標の位置を指定 end
 
 	//ワールド座標変換用の行列の算出 start
@@ -153,11 +178,15 @@ void Draw()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat_world);
 	//ワールド座標変換用の行列の算出 end
 
+	g_pD3DDevice->SetStreamSource(0, pVB, 0, sizeof(VERTEX));
+	g_pD3DDevice->SetIndices(d3dib);
+
+
 	g_pD3DDevice->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
 
 	g_pD3DDevice->SetTexture(0, NULL);
 
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, v, sizeof(VERTEX));
+	g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, 4, 0, 2);
 
 	g_pD3DDevice->EndScene();
 
